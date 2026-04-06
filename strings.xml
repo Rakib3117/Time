@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TimeGate</string>
+    <string name="accessibility_service_label">TimeGate App Blocker</string>
+    <string name="accessibility_service_desc">TimeGate অ্যাপ ব্যবহারের সময় নিয়ন্ত্রণ করতে এই সেবা ব্যবহার করে।</string>
+</resources>

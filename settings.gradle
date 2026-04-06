@@ -1,0 +1,2 @@
+rootProject.name = "TimeGate"
+include ':app'

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="28dp"
+    android:background="@color/background">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⏱️ সময় নির্ধারণ করুন"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        android:gravity="center"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/appNameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="App Name"
+        android:textSize="18sp"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:layout_marginBottom="32dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="কতক্ষণ ব্যবহার করবেন?"
+        android:textSize="16sp"
+        android:textColor="@color/text_primary"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Time buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="12dp">
+
+        <Button
+            android:id="@+id/btn5min"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:text="5 মি"
+            android:textSize="14sp"
+            android:backgroundTint="@color/btn_unselected"/>
+
+        <Button
+            android:id="@+id/btn10min"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:text="10 মি"
+            android:textSize="14sp"
+            android:backgroundTint="@color/btn_unselected"/>
+
+        <Button
+            android:id="@+id/btn15min"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:text="15 মি"
+            android:textSize="14sp"
+            android:backgroundTint="@color/primary"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="24dp">
+
+        <Button
+            android:id="@+id/btn30min"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:text="30 মি"
+            android:textSize="14sp"
+            android:backgroundTint="@color/btn_unselected"/>
+
+        <Button
+            android:id="@+id/btn60min"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:text="1 ঘন্টা"
+            android:textSize="14sp"
+            android:backgroundTint="@color/btn_unselected"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="নির্বাচিত সময়:"
+        android:textSize="14sp"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/selectedTimeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="15 মিনিট"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        android:gravity="center"
+        android:layout_marginBottom="32dp"/>
+
+    <Button
+        android:id="@+id/startBtn"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="শুরু করুন ✅"
+        android:textSize="18sp"
+        android:backgroundTint="@color/green"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/cancelBtn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="বাতিল করুন"
+        android:textSize="16sp"
+        android:backgroundTint="@color/btn_unselected"/>
+
+</LinearLayout>
