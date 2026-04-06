@@ -1,0 +1,90 @@
+name: Build TimeGate APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Reconstruct project structure
+        run: |
+          mkdir -p app/src/main/java/com/kazi/timegate
+          mkdir -p app/src/main/res/layout
+          mkdir -p app/src/main/res/values
+          mkdir -p app/src/main/res/xml
+
+          # Kotlin source files
+          cp MainActivity.kt           app/src/main/java/com/kazi/timegate/
+          cp AppBlockService.kt        app/src/main/java/com/kazi/timegate/
+          cp TimerActivity.kt          app/src/main/java/com/kazi/timegate/
+          cp BlockedActivity.kt        app/src/main/java/com/kazi/timegate/
+          cp AppSelectActivity.kt      app/src/main/java/com/kazi/timegate/
+          cp Adapters.kt               app/src/main/java/com/kazi/timegate/
+
+          # Layout XML files
+          cp activity_main.xml         app/src/main/res/layout/
+          cp activity_timer.xml        app/src/main/res/layout/
+          cp activity_blocked.xml      app/src/main/res/layout/
+          cp activity_app_select.xml   app/src/main/res/layout/
+          cp item_monitored_app.xml    app/src/main/res/layout/
+          cp item_app_select.xml       app/src/main/res/layout/
+
+          # Values
+          cp strings.xml               app/src/main/res/values/
+          cp colors.xml                app/src/main/res/values/
+          cp styles.xml                app/src/main/res/values/
+
+          # Accessibility service config
+          cp accessibility_service.xml app/src/main/res/xml/
+
+          # Manifest
+          cp AndroidManifest.xml       app/src/main/
+
+          # Gradle files
+          cp app_build.gradle          app/build.gradle
+          cp project_build.gradle      build.gradle
+          cp settings.gradle           settings.gradle
+          cp gradle.properties         gradle.properties
+
+      - name: Setup Gradle wrapper
+        run: |
+          mkdir -p gradle/wrapper
+          cat > gradle/wrapper/gradle-wrapper.properties << 'EOF'
+          distributionBase=GRADLE_USER_HOME
+          distributionPath=wrapper/dists
+          distributionUrl=https\://services.gradle.org/distributions/gradle-8.0-bin.zip
+          zipStoreBase=GRADLE_USER_HOME
+          zipStorePath=wrapper/dists
+          EOF
+
+          curl -fsSL "https://services.gradle.org/distributions/gradle-8.0-bin.zip" -o gradle-bin.zip
+          unzip -q gradle-bin.zip -d gradle-extracted
+          sudo mv gradle-extracted/gradle-8.0 /opt/gradle
+
+          /opt/gradle/bin/gradle wrapper
+          chmod +x gradlew
+
+      - name: Accept Android licenses
+        run: yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: TimeGate-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
